@@ -10,7 +10,7 @@ import com.fintech.ozmaden_developerslife.repository.PostRepository
 import com.fintech.ozmaden_developerslife.ui.PostViewModel
 import kotlinx.coroutines.launch
 
-class RandomViewModel : PostViewModel() {
+class RandomPostViewModel : PostViewModel() {
     override suspend fun loadNewPost() {
         viewModelScope.launch {
             val rndPost = postRepository.getRandomPost()

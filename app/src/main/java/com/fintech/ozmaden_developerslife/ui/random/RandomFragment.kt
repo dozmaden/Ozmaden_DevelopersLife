@@ -15,7 +15,7 @@ import com.fintech.ozmaden_developerslife.model.Post
 
 class RandomFragment : Fragment() {
 
-    private lateinit var viewModel: RandomViewModel
+    private lateinit var viewModel: RandomPostViewModel
     private var _binding: FragmentRandomBinding? = null
 
     // This property is only valid between onCreateView and
@@ -32,7 +32,7 @@ class RandomFragment : Fragment() {
         val root: View = binding.root
 
         viewModel =
-            ViewModelProvider(this).get(RandomViewModel::class.java)
+            ViewModelProvider(this).get(RandomPostViewModel::class.java)
 
         viewModel.post.observe(viewLifecycleOwner, Observer {
             updatePost(it)
