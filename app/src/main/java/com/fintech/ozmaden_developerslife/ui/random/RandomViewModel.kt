@@ -11,27 +11,53 @@ import kotlinx.coroutines.launch
 
 class RandomViewModel : ViewModel() {
 
+    private val postRepository = PostRepository()
+
+    private val _post = MutableLiveData<Post>()
+
+    val post: LiveData<Post> = _post
     private val _description = MutableLiveData<String>()
+
     val description: LiveData<String> = _description
 
-    //
-    private val _post = MutableLiveData<Post>()
-    val post: LiveData<Post> = _post
+    private val postHistory = mutableListOf<Post>()
 
-    protected val postRepository = PostRepository()
+    internal var position: Int = -1
 
     init {
         loadPost()
     }
 
+    internal fun onNext() {
+        loadPost()
+    }
+
+    internal fun onPrevious() {
+        if (position > 0) {
+            position--
+            val oldPost = postHistory.elementAt(position)
+            _post.postValue(oldPost)
+        }
+    }
+
     private fun loadPost() {
         viewModelScope.launch {
             try {
-                loadNewPost()
+                if (postHistory.size > position + 1) {
+                    loadOldPost()
+                } else {
+                    loadNewPost()
+                }
             } catch (e: Exception) {
-                Log.w("RandomViewModel", e.message.toString())
+                Log.w("PageViewModel", e.message.toString())
             }
         }
+    }
+
+    private fun loadOldPost() {
+        position++
+        val oldPost = postHistory.elementAt(position)
+        _post.postValue(oldPost)
     }
 
     private suspend fun loadNewPost() {
