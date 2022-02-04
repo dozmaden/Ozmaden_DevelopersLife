@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_random">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.fintech.ozmaden_developerslife.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_random"
+        android:name="com.fintech.ozmaden_developerslife.ui.random.RandomFragment"
+        android:label="Random"
+        tools:layout="@layout/fragment_random" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
