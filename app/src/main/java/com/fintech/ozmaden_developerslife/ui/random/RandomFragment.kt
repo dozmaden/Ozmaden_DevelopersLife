@@ -1,6 +1,7 @@
 package com.fintech.ozmaden_developerslife.ui.random
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,13 +29,24 @@ class RandomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel =
-            ViewModelProvider(this).get(RandomViewModel::class.java)
-
         _binding = FragmentRandomBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.prevBtn.setOnClickListener {
+        viewModel =
+            ViewModelProvider(this).get(RandomViewModel::class.java)
+
+        viewModel.post.observe(viewLifecycleOwner, Observer {
+            updatePost(it)
+            if (viewModel.position > 0) {
+                binding.prevBtn.isEnabled = true
+                binding.prevBtn.show()
+            } else {
+                binding.prevBtn.isEnabled = false
+                binding.prevBtn.hide()
+            }
+        })
+
+        binding.nextBtn.setOnClickListener {
             nextPost()
         }
 
@@ -52,17 +64,6 @@ class RandomFragment : Fragment() {
 
         viewModel.post.observe(viewLifecycleOwner, Observer {
             Glide.with(this).load(it.gifURL.replace("http", "https")).into(gifView);
-        })
-
-        viewModel.post.observe(viewLifecycleOwner, Observer {
-            updatePost(it)
-            if (viewModel.position > 0) {
-                binding.prevBtn.isEnabled = true
-                binding.prevBtn.show()
-            } else {
-                binding.prevBtn.isEnabled = false
-                binding.prevBtn.hide()
-            }
         })
 
         return root
