@@ -14,7 +14,7 @@ class GifLoader {
 
             val circularProgress = CircularProgressDrawable(gifView.context)
             circularProgress.apply {
-                centerRadius = 30f
+                centerRadius = 50f
                 strokeWidth = 10f
                 start()
             }

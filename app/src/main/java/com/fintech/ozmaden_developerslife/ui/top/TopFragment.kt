@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.fintech.ozmaden_developerslife.databinding.FragmentTopBinding
 import com.fintech.ozmaden_developerslife.model.Post
+import com.fintech.ozmaden_developerslife.utils.GifLoader
 
 class TopFragment : Fragment() {
 
@@ -62,7 +63,7 @@ class TopFragment : Fragment() {
         val gifView: ImageView = binding.gif
 
         viewModel.post.observe(viewLifecycleOwner, Observer {
-            Glide.with(this).load(it.gifURL.replace("http", "https")).into(gifView);
+            GifLoader.loadImage(it.gifURL, gifView)
         })
 
         return root

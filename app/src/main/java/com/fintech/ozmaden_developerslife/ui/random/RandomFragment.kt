@@ -64,7 +64,6 @@ class RandomFragment : Fragment() {
 
         viewModel.post.observe(viewLifecycleOwner, Observer {
             GifLoader.loadImage(it.gifURL, gifView)
-//            Glide.with(this).load(it.gifURL.replace("http", "https")).into(gifView);
         })
 
         return root
