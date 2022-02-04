@@ -1,12 +1,7 @@
 package com.fintech.ozmaden_developerslife.ui.random
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fintech.ozmaden_developerslife.model.Post
-import com.fintech.ozmaden_developerslife.repository.PostRepository
 import com.fintech.ozmaden_developerslife.ui.PostViewModel
 import kotlinx.coroutines.launch
 
