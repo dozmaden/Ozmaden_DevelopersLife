@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_top" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.fintech.ozmaden_developerslife.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_latest"
+        android:name="com.fintech.ozmaden_developerslife.ui.latest.LatestFragment"
+        android:label="Latest"
+        tools:layout="@layout/fragment_latest" />
 </navigation>
