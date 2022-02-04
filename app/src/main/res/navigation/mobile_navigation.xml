@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_random" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.fintech.ozmaden_developerslife.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_top"
+        android:name="com.fintech.ozmaden_developerslife.ui.top.TopFragment"
+        android:label="Top"
+        tools:layout="@layout/fragment_top" />
 
     <fragment
         android:id="@+id/navigation_notifications"

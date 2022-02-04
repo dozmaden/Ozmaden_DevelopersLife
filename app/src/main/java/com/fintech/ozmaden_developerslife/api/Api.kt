@@ -12,7 +12,7 @@ interface Api {
     suspend fun getRandomPost(): Post
 
     @GET("/{category}/{page}?json=true")
-    fun getCategoryPosts(
+    suspend fun getCategoryPosts(
         @Path("category") category: String,
         @Path("page") page: Int
     ): CategoryPosts

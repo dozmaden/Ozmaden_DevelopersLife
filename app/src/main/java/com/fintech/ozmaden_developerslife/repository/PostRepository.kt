@@ -15,7 +15,7 @@ class PostRepository {
         return post
     }
 
-    fun getCategoryPosts(category: String, page: Int): Collection<Post>? {
+    suspend fun getCategoryPosts(category: String, page: Int): Collection<Post>? {
         return RetrofitInstance.api.getCategoryPosts(category, page).result
     }
 }
