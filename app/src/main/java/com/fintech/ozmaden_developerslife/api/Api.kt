@@ -6,9 +6,9 @@ import retrofit2.http.Path
 internal const val ENDPOINT = "https://developerslife.ru/"
 
 interface Api {
-    @GET("/random?json=true")
-    fun getRandomPost():
-    // Post
+    //    @GET("/random?json=true")
+    //    fun getRandomPost():
+    //    // Post
 
     @GET("/{category}/{page}?json=true")
     fun getCategoryPosts(
