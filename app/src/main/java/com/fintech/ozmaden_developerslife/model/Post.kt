@@ -2,7 +2,7 @@ package com.fintech.ozmaden_developerslife.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Post (
+data class Post(
     val id: Int,
     val description: String,
     val votes: Int,
