@@ -70,11 +70,11 @@ class RandomFragment : Fragment() {
 
     private fun nextPost() {
         hidePost()
-        viewModel.onNext()
+        viewModel.nextPost()
     }
 
     private fun previousPost() {
-        viewModel.onPrevious()
+        viewModel.previousPost()
     }
 
     private fun hidePost() {
