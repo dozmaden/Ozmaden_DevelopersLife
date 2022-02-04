@@ -66,6 +66,8 @@ class RandomViewModel : ViewModel() {
             if (rndPost != null) {
                 _post.postValue(rndPost!!)
                 _description.postValue(rndPost.description)
+                postHistory.add(rndPost)
+                position++
                 Log.d("RandomViewModel", "Got random post and inserted it!")
             } else {
                 Log.d("RandomViewModel", "Could not insert post!")
