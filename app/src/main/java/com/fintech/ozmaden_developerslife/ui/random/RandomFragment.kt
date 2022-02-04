@@ -33,18 +33,23 @@ class RandomFragment : Fragment() {
         _binding = FragmentRandomBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textRandom
+        val textView: TextView = binding.text
 
-        viewModel.text.observe(viewLifecycleOwner, Observer {
+//        viewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
+
+        viewModel.description.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
 
         val gifView: ImageView = binding.gif
 
+//        Log.d("RandomFragment", it.description)
         viewModel.post.observe(viewLifecycleOwner, Observer {
             Glide.with(this).load(it.gifURL.replace("http", "https")).into(gifView);
-            textView.text = it.description
         })
+
 
         return root
     }

@@ -11,11 +11,8 @@ import kotlinx.coroutines.launch
 
 class RandomViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Random Fragment"
-    }
-
-    val text: LiveData<String> = _text
+    private val _description = MutableLiveData<String>()
+    val description: LiveData<String> = _description
 
     //
     private val _post = MutableLiveData<Post>()
@@ -42,6 +39,7 @@ class RandomViewModel : ViewModel() {
             val rndPost = postRepository.getRandomPost()
             if (rndPost != null) {
                 _post.postValue(rndPost!!)
+                _description.postValue(rndPost.description)
                 Log.d("RandomViewModel", "Got random post and inserted it!")
             } else {
                 Log.d("RandomViewModel", "Could not insert post!")
