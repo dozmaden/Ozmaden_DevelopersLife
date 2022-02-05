@@ -31,10 +31,6 @@ internal abstract class PostViewModel : ViewModel() {
         super.onCleared()
     }
 
-//    init {
-//        loadPost()
-//    }
-
     internal fun nextPost() {
         loadPost()
     }
