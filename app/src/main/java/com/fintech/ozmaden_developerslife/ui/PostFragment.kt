@@ -52,11 +52,6 @@ abstract class PostFragment : Fragment() {
         }
 
         val textView: TextView = binding.text
-
-//        viewModel.description.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
-
         val gifView: ImageView = binding.gif
 
         viewModel.post.observe(viewLifecycleOwner, Observer {
@@ -68,10 +63,6 @@ abstract class PostFragment : Fragment() {
     }
 
     protected abstract fun setUpViewModel()
-//    {
-//        viewModel =
-//            ViewModelProvider(this).get(RandomPostViewModel::class.java)
-//    }
 
     private fun nextPost() {
         hidePost()
