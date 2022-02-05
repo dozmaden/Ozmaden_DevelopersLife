@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
-import com.fintech.ozmaden_developerslife.model.Post
 import com.fintech.ozmaden_developerslife.utils.GifLoader
 
 abstract class PostFragment : Fragment() {
@@ -18,73 +17,75 @@ abstract class PostFragment : Fragment() {
 
     private var _binding: FragmentPostBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+
+    private fun started() = viewModel.position > 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = setUpViewModel()
 
         _binding = FragmentPostBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        viewModel = setUpViewModel()
 
-        viewModel.post.observe(viewLifecycleOwner, Observer {
-            updatePost(it)
-            if (viewModel.position > 0) {
-                binding.prevBtn.isEnabled = true
-                binding.prevBtn.show()
-            } else {
-                binding.prevBtn.isEnabled = false
-                binding.prevBtn.hide()
-            }
-        })
+        setObserver()
+        setBtnClickListeners()
+        startFeed()
 
-        binding.nextBtn.setOnClickListener {
-            nextPost()
-        }
-
-        binding.prevBtn.setOnClickListener {
-            previousPost()
-        }
-
-        val textView: TextView = binding.text
-        val gifView: ImageView = binding.gif
-
-        viewModel.post.observe(viewLifecycleOwner, Observer {
-            binding.prevBtn.isEnabled = false
-            GifLoader.loadImage(it.gifURL, gifView)
-            textView.text = it.description
-            binding.prevBtn.isEnabled = true
-        })
-
-        nextPost()
-
-        return root
+        return binding.root
     }
 
     protected abstract fun setUpViewModel(): PostViewModel
 
+    private fun startFeed() {
+        if (!started()) {
+            nextPost()
+        }
+    }
+
+    private fun setObserver() {
+        val textView: TextView = binding.text
+        val gifView: ImageView = binding.gif
+
+        viewModel.post.observe(viewLifecycleOwner, Observer {
+            GifLoader.loadImage(it.gifURL, gifView)
+            textView.text = it.description
+            updatePreviousBtn()
+        })
+    }
+
+    private fun setBtnClickListeners() {
+        binding.apply {
+            nextBtn.setOnClickListener {
+                nextPost()
+            }
+            prevBtn.setOnClickListener {
+                previousPost()
+            }
+        }
+    }
+
     private fun nextPost() {
-        hidePost()
         viewModel.nextPost()
     }
 
     private fun previousPost() {
-        hidePost()
         viewModel.previousPost()
     }
 
-    private fun hidePost() {
-        binding.text.visibility = View.GONE
-    }
-
-    private fun updatePost(newPost: Post) {
-        binding.text.text = newPost.description
-        binding.text.visibility = View.VISIBLE
+    private fun updatePreviousBtn() {
+        binding.apply {
+            if (started()) {
+                prevBtn.isEnabled = true
+                prevBtn.show()
+            } else {
+                prevBtn.isEnabled = false
+                prevBtn.hide()
+            }
+        }
     }
 
     override fun onDestroyView() {
