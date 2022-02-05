@@ -8,7 +8,8 @@ import com.fintech.ozmaden_developerslife.ui.PostViewModel
 class TopFragment : PostFragment() {
     override fun setUpViewModel(): PostViewModel {
         val viewModelFactory = CategoryPostViewModel.Factory("top")
-        viewModel = ViewModelProvider(this, viewModelFactory)[CategoryPostViewModel::class.java]
+        viewModel =
+            ViewModelProvider(this, viewModelFactory)[CategoryPostViewModel::class.java]
         return viewModel
     }
 }
