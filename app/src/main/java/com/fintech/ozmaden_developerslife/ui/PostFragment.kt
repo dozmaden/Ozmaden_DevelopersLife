@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import coil.load
 import coil.size.Scale
+import com.fintech.ozmaden_developerslife.R
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
 
 internal abstract class PostFragment : Fragment() {
@@ -29,6 +31,7 @@ internal abstract class PostFragment : Fragment() {
         viewModel = setUpViewModel()
 
         setObserver()
+        setFailObserver()
         setBtnClickListeners()
         startFeed()
 
@@ -60,6 +63,19 @@ internal abstract class PostFragment : Fragment() {
                     text.text = it.description
                 }
                 updatePreviousBtn()
+            }
+        )
+    }
+
+    private fun setFailObserver() {
+        viewModel.onLoadFail.observe(
+            viewLifecycleOwner,
+            {
+                if (it == true) {
+                    this.view?.let {
+                        findNavController().navigate(R.id.action_postFragment_to_errorFragment)
+                    }
+                }
             }
         )
     }

@@ -4,12 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.fintech.ozmaden_developerslife.model.Post
 import com.fintech.ozmaden_developerslife.repository.PostRepository
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
-import kotlinx.coroutines.launch
 
 internal abstract class PostViewModel : ViewModel() {
 
@@ -26,6 +24,10 @@ internal abstract class PostViewModel : ViewModel() {
     protected val postHistory = mutableListOf<Post>()
     internal var position: Int = -1
 
+    protected val loadingFail = MutableLiveData<Boolean>()
+    internal val onLoadFail: LiveData<Boolean>
+        get() = loadingFail
+
     override fun onCleared() {
         disposables.dispose()
         super.onCleared()
@@ -36,16 +38,16 @@ internal abstract class PostViewModel : ViewModel() {
     }
 
     private fun loadPost() {
-        viewModelScope.launch {
-            try {
-                if (postHistory.size > position + 1) {
-                    loadCachedPost()
-                } else {
-                    loadNewPost()
-                }
-            } catch (e: Exception) {
-                Log.w("PostViewModel", e.message.toString())
+        try {
+            if (postHistory.size > position + 1) {
+                loadCachedPost()
+            } else {
+                loadNewPost()
             }
+            loadingFail.postValue(false)
+        } catch (e: Exception) {
+            Log.w("PostViewModel", e.message.toString())
+            loadingFail.postValue(true)
         }
     }
 
