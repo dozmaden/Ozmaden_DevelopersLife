@@ -4,5 +4,5 @@
     <string name="title_top">Top</string>
     <string name="title_latest">Latest</string>
     <string name="tryAgain">ПОВТОРИТЬ</string>
-    <string name="tryAgaintDescription">Произошла ошибка при загрузке данных. Проверьте подключение к сети.</string>
+    <string name="tryAgainDescription">Произошла ошибка при загрузке данных. Проверьте подключение к сети.</string>
 </resources>

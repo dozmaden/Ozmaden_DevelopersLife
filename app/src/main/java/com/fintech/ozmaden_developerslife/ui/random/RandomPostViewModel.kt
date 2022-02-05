@@ -14,7 +14,7 @@ internal class RandomPostViewModel : PostViewModel() {
                 .subscribeBy(
                     onSuccess = { post ->
                         position++
-                        _post.postValue(post!!)
+                        _post.postValue(post)
                         _description.postValue(post.description)
                         postHistory.add(post)
                         _post.postValue(postHistory.elementAt(position))

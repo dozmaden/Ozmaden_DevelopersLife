@@ -1,3 +1,5 @@
+@file:Suppress("PropertyName")
+
 package com.fintech.ozmaden_developerslife.ui
 
 import android.util.Log

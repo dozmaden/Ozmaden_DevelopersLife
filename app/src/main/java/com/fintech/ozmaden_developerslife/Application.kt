@@ -9,7 +9,7 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.CachePolicy
 import coil.util.DebugLogger
 
-class MyApplication() : Application(), ImageLoaderFactory {
+class MyApplication : Application(), ImageLoaderFactory {
     override fun newImageLoader(): ImageLoader {
         return ImageLoader.Builder(this)
             .crossfade(true)
