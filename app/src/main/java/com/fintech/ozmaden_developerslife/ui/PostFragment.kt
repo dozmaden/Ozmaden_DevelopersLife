@@ -8,8 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import coil.ImageLoader
+import coil.load
+import coil.size.Scale
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
-import com.fintech.ozmaden_developerslife.utils.GifLoader
 
 internal abstract class PostFragment : Fragment() {
 
@@ -18,9 +20,8 @@ internal abstract class PostFragment : Fragment() {
     private var _binding: FragmentPostBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
-    private val binding get() = _binding!!
-
-    private fun started() = viewModel.position > 0
+    private val binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,30 +42,32 @@ internal abstract class PostFragment : Fragment() {
     protected abstract fun setUpViewModel(): PostViewModel
 
     private fun startFeed() {
-        if (!started()) {
+        if (viewModel.position < 0) {
             nextPost()
         }
     }
 
     private fun setObserver() {
-        val textView: TextView = binding.text
-        val gifView: ImageView = binding.gif
-
-        viewModel.post.observe(viewLifecycleOwner, Observer {
-            GifLoader.loadImage(it.gifURL, gifView)
-            textView.text = it.description
-            updatePreviousBtn()
-        })
+        viewModel.post.observe(
+            viewLifecycleOwner,
+            {
+                binding.apply {
+                    gif.load(it.gifURL) {
+                        crossfade(true)
+                        crossfade(300)
+                        scale(Scale.FILL)
+                    }
+                    text.text = it.description
+                }
+                updatePreviousBtn()
+            }
+        )
     }
 
     private fun setBtnClickListeners() {
         binding.apply {
-            nextBtn.setOnClickListener {
-                nextPost()
-            }
-            prevBtn.setOnClickListener {
-                previousPost()
-            }
+            nextBtn.setOnClickListener { nextPost() }
+            prevBtn.setOnClickListener { previousPost() }
         }
     }
 
@@ -78,7 +81,7 @@ internal abstract class PostFragment : Fragment() {
 
     private fun updatePreviousBtn() {
         binding.apply {
-            if (started()) {
+            if (viewModel.position > 0) {
                 prevBtn.isEnabled = true
                 prevBtn.show()
             } else {
