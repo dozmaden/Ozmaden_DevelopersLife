@@ -7,8 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 internal interface Api {
-    @GET("/random?json=true")
-    fun getRandomPost(): Single<Post>
+    @GET("/random?json=true") fun getRandomPost(): Single<Post>
 
     @GET("/{category}/{page}?json=true")
     fun getCategoryPosts(

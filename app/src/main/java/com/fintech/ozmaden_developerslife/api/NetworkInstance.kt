@@ -10,20 +10,18 @@ private const val ENDPOINT = "https://developerslife.ru/"
 
 internal object NetworkInstance {
 
-    private val logInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
+    private val logInterceptor =
+        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    private val httpClient = OkHttpClient.Builder()
-        .addNetworkInterceptor(logInterceptor)
-        .build()
+    private val httpClient = OkHttpClient.Builder().addNetworkInterceptor(logInterceptor).build()
 
-    private val retrofit = Retrofit.Builder()
-        .client(httpClient)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-        .baseUrl(ENDPOINT)
-        .build()
+    private val retrofit =
+        Retrofit.Builder()
+            .client(httpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .baseUrl(ENDPOINT)
+            .build()
 
     val api: Api = retrofit.create(Api::class.java)
 }
