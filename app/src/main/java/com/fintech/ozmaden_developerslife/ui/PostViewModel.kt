@@ -22,26 +22,18 @@ abstract class PostViewModel : ViewModel() {
     internal var position: Int = -1
 
     init {
-        nextPost()
+        loadPost()
     }
 
     internal fun nextPost() {
         loadPost()
     }
 
-    internal fun previousPost() {
-        if (position > 0) {
-            val oldPost = postHistory.elementAt(position)
-            _post.postValue(oldPost)
-            position--
-        }
-    }
-
     private fun loadPost() {
         viewModelScope.launch {
             try {
                 if (postHistory.size > position + 1) {
-                    loadOldPost()
+                    loadCachedPost()
                 } else {
                     loadNewPost()
                 }
@@ -51,11 +43,19 @@ abstract class PostViewModel : ViewModel() {
         }
     }
 
-    private fun loadOldPost() {
+    private fun loadCachedPost() {
+        position++
         val oldPost = postHistory.elementAt(position)
         _post.postValue(oldPost)
-        position++
     }
 
     protected abstract suspend fun loadNewPost()
+
+    internal fun previousPost() {
+        if (position > 0) {
+            position--
+            val oldPost = postHistory.elementAt(position)
+            _post.postValue(oldPost)
+        }
+    }
 }

@@ -55,8 +55,10 @@ abstract class PostFragment : Fragment() {
         val gifView: ImageView = binding.gif
 
         viewModel.post.observe(viewLifecycleOwner, Observer {
+            binding.prevBtn.isEnabled = false
             GifLoader.loadImage(it.gifURL, gifView)
             textView.text = it.description
+            binding.prevBtn.isEnabled = true
         })
 
         return root
@@ -70,6 +72,7 @@ abstract class PostFragment : Fragment() {
     }
 
     private fun previousPost() {
+        hidePost()
         viewModel.previousPost()
     }
 

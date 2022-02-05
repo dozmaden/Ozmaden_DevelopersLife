@@ -23,9 +23,9 @@ class CategoryPostViewModel(
         viewModelScope.launch {
             val newPosts = postRepository.getCategoryPosts(category, page)
             newPosts?.let {
-                position++
-                page++
                 postHistory.addAll(newPosts)
+                page++
+                position++
                 _post.postValue(postHistory.elementAt(position))
             }
         }
