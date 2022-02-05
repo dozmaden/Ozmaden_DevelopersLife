@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
 import com.fintech.ozmaden_developerslife.databinding.FragmentRandomBinding
 import com.fintech.ozmaden_developerslife.model.Post
 import com.fintech.ozmaden_developerslife.utils.GifLoader
@@ -17,7 +18,7 @@ import com.fintech.ozmaden_developerslife.utils.GifLoader
 class RandomFragment : Fragment() {
 
     private lateinit var viewModel: RandomPostViewModel
-    private var _binding: FragmentRandomBinding? = null
+    private var _binding: FragmentPostBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -29,7 +30,7 @@ class RandomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentRandomBinding.inflate(inflater, container, false)
+        _binding = FragmentPostBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         viewModel =
