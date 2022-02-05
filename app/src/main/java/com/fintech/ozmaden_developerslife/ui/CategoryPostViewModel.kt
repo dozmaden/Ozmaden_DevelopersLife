@@ -12,11 +12,11 @@ class CategoryPostViewModel(
 
     private var page: Int = 0
 
-    init {
-        viewModelScope.launch {
-            loadNewPost()
-        }
-    }
+//    init {
+//        viewModelScope.launch {
+//            loadNewPost()
+//        }
+//    }
 
     override suspend fun loadNewPost() {
         Log.d("CategoryPostViewModel", category)

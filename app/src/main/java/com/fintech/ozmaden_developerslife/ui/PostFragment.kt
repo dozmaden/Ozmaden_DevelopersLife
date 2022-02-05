@@ -61,6 +61,8 @@ abstract class PostFragment : Fragment() {
             binding.prevBtn.isEnabled = true
         })
 
+        nextPost()
+
         return root
     }
 

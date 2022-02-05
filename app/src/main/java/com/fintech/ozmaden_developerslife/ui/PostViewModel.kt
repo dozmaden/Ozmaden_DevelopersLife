@@ -21,9 +21,9 @@ abstract class PostViewModel : ViewModel() {
     protected val postHistory = mutableListOf<Post>()
     internal var position: Int = -1
 
-    init {
-        loadPost()
-    }
+//    init {
+//        loadPost()
+//    }
 
     internal fun nextPost() {
         loadPost()
