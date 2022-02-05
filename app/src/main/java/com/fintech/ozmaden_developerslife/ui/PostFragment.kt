@@ -16,8 +16,6 @@ internal abstract class PostFragment : Fragment() {
     protected lateinit var viewModel: PostViewModel
 
     private var _binding: FragmentPostBinding? = null
-
-    // This property is only valid between onCreateView and onDestroyView.
     private val binding
         get() = _binding!!
 
@@ -50,7 +48,6 @@ internal abstract class PostFragment : Fragment() {
         viewModel.post.observe(
             viewLifecycleOwner,
             {
-                binding.apply { gif.load(it.previewURL) }
                 binding.apply {
                     gif.load(it.gifURL) {
                         if (it.gifSize > 7340032) {
