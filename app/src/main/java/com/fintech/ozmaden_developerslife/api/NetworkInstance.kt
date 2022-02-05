@@ -1,11 +1,15 @@
 package com.fintech.ozmaden_developerslife.api
 
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitInstance {
+private const val ENDPOINT = "https://developerslife.ru/"
+
+internal object NetworkInstance {
+
     private val logInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -17,6 +21,7 @@ object RetrofitInstance {
     private val retrofit = Retrofit.Builder()
         .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create())
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .baseUrl(ENDPOINT)
         .build()
 

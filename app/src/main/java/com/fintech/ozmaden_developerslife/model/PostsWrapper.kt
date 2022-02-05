@@ -1,6 +1,6 @@
 package com.fintech.ozmaden_developerslife.model
 
-data class CategoryPosts(
-    val result: Collection<Post>,
+data class PostsWrapper(
+    val result: List<Post>,
     val totalCount: Int
 )

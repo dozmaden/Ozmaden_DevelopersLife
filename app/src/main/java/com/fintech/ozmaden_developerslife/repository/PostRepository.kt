@@ -1,21 +1,19 @@
 package com.fintech.ozmaden_developerslife.repository
 
-import com.fintech.ozmaden_developerslife.api.RetrofitInstance
+import com.fintech.ozmaden_developerslife.api.NetworkInstance
 import com.fintech.ozmaden_developerslife.model.Post
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.fintech.ozmaden_developerslife.model.PostsWrapper
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
-class PostRepository {
-    suspend fun getRandomPost(): Post? {
-//        return RetrofitInstance.api.getRandomPost()
-        var post: Post? = null
-        withContext(Dispatchers.IO) {
-            post = RetrofitInstance.api.getRandomPost()
-        }
-        return post
-    }
+internal class PostRepository {
+    private val api = NetworkInstance.api
 
-    suspend fun getCategoryPosts(category: String, page: Int): Collection<Post>? {
-        return RetrofitInstance.api.getCategoryPosts(category, page).result
-    }
+    fun getRandomPost(): Single<Post> = api.getRandomPost()
+        .subscribeOn(Schedulers.io())
+
+    fun getCategoryPosts(category: String, page: Int): Single<List<Post>> =
+        api.getCategoryPosts(category, page)
+            .subscribeOn(Schedulers.io())
+            .map(PostsWrapper::result)
 }

@@ -1,23 +1,20 @@
 package com.fintech.ozmaden_developerslife.ui.random
 
-import android.util.Log
-import androidx.lifecycle.viewModelScope
 import com.fintech.ozmaden_developerslife.ui.PostViewModel
-import kotlinx.coroutines.launch
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.kotlin.subscribeBy
 
-class RandomPostViewModel : PostViewModel() {
-    override suspend fun loadNewPost() {
-        viewModelScope.launch {
-            val rndPost = postRepository.getRandomPost()
-            if (rndPost != null) {
+internal class RandomPostViewModel : PostViewModel() {
+    override fun loadNewPost() {
+        postRepository.getRandomPost()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(onSuccess = { post ->
                 position++
-                _post.postValue(rndPost!!)
-                _description.postValue(rndPost.description)
-                postHistory.add(rndPost)
-                Log.d("RandomViewModel", "Got random post and inserted it!")
-            } else {
-                Log.d("RandomViewModel", "Could not insert post!")
-            }
-        }
+                _post.postValue(post!!)
+                _description.postValue(post.description)
+                postHistory.add(post)
+                _post.postValue(postHistory.elementAt(position))
+            })
+            .onBind()
     }
 }

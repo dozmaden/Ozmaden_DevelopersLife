@@ -1,28 +1,26 @@
 package com.fintech.ozmaden_developerslife.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.kotlin.subscribeBy
 
-class CategoryPostViewModel(
+internal class CategoryPostViewModel(
     private val category: String
 ) : PostViewModel() {
 
     private var page: Int = 0
 
-    override suspend fun loadNewPost() {
-        Log.d("CategoryPostViewModel", category)
-        viewModelScope.launch {
-            val newPosts = postRepository.getCategoryPosts(category, page)
-            newPosts?.let {
-                postHistory.addAll(newPosts)
+    override fun loadNewPost() {
+        postRepository.getCategoryPosts(category, page)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(onSuccess = { posts ->
+                postHistory.addAll(posts)
                 page++
                 position++
                 _post.postValue(postHistory.elementAt(position))
-            }
-        }
+            })
+            .onBind()
     }
 
     internal class Factory(

@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
 import com.fintech.ozmaden_developerslife.utils.GifLoader
 
-abstract class PostFragment : Fragment() {
+internal abstract class PostFragment : Fragment() {
 
     protected lateinit var viewModel: PostViewModel
 

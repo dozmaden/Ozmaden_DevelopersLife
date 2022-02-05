@@ -7,9 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fintech.ozmaden_developerslife.model.Post
 import com.fintech.ozmaden_developerslife.repository.PostRepository
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.coroutines.launch
 
-abstract class PostViewModel : ViewModel() {
+internal abstract class PostViewModel : ViewModel() {
+
+    private val disposables = CompositeDisposable()
+
     protected val postRepository = PostRepository()
 
     protected val _post = MutableLiveData<Post>()
@@ -20,6 +25,11 @@ abstract class PostViewModel : ViewModel() {
 
     protected val postHistory = mutableListOf<Post>()
     internal var position: Int = -1
+
+    override fun onCleared() {
+        disposables.dispose()
+        super.onCleared()
+    }
 
 //    init {
 //        loadPost()
@@ -49,7 +59,7 @@ abstract class PostViewModel : ViewModel() {
         _post.postValue(oldPost)
     }
 
-    protected abstract suspend fun loadNewPost()
+    protected abstract fun loadNewPost()
 
     internal fun previousPost() {
         if (position > 0) {
@@ -58,4 +68,6 @@ abstract class PostViewModel : ViewModel() {
             _post.postValue(oldPost)
         }
     }
+
+    protected fun Disposable.onBind() = disposables.add(this)
 }

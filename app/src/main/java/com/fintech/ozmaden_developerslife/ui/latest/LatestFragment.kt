@@ -5,7 +5,7 @@ import com.fintech.ozmaden_developerslife.ui.CategoryPostViewModel
 import com.fintech.ozmaden_developerslife.ui.PostFragment
 import com.fintech.ozmaden_developerslife.ui.PostViewModel
 
-class LatestFragment : PostFragment() {
+internal class LatestFragment : PostFragment() {
     override fun setUpViewModel(): PostViewModel {
         val viewModelFactory = CategoryPostViewModel.Factory("latest")
         viewModel =
