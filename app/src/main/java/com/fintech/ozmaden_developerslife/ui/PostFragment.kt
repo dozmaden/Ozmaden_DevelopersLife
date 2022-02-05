@@ -47,8 +47,12 @@ internal abstract class PostFragment : Fragment() {
         viewModel.post.observe(
             viewLifecycleOwner,
             {
+                binding.apply { gif.load(it.previewURL) }
                 binding.apply {
                     gif.load(it.gifURL) {
+                        //                        if (it.gifSize > 5242880 ){
+                        //                            placeholder(R.drawable.ic_baseline_loop_24)
+                        //                        }
                         crossfade(true)
                         crossfade(300)
                         scale(Scale.FILL)
