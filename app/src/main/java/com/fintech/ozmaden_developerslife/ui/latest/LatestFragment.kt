@@ -8,7 +8,7 @@ import com.fintech.ozmaden_developerslife.ui.PostViewModel
 
 class LatestFragment : PostFragment() {
     override fun setUpViewModel(): PostViewModel {
-        val viewModelFactory = CategoryPostViewModel.Factory( "latest")
+        val viewModelFactory = CategoryPostViewModel.Factory("latest")
         viewModel = ViewModelProvider(this, viewModelFactory)[CategoryPostViewModel::class.java]
         Log.d("LatestFragment", (viewModel as CategoryPostViewModel).category)
         return viewModel

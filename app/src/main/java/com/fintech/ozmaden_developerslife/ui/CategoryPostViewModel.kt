@@ -1,6 +1,5 @@
 package com.fintech.ozmaden_developerslife.ui
 
-import android.app.Application
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,12 +7,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class CategoryPostViewModel(
-    val category: String
+    private val category: String
 ) : PostViewModel() {
 
     private var page: Int = 0
 
-    init{
+    init {
         viewModelScope.launch {
             loadNewPost()
         }
@@ -34,7 +33,7 @@ class CategoryPostViewModel(
 
     internal class Factory(
         private val category: String
-    ) : ViewModelProvider.Factory  {
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             @Suppress("UNCHECKED_CAST")
             return CategoryPostViewModel(category) as T
