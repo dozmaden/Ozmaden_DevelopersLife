@@ -4,16 +4,16 @@
     <item
         android:id="@+id/navigation_random"
         android:icon="@drawable/ic_baseline_shuffle_24"
-        android:title="Random" />
+        android:title="@string/title_random" />
 
     <item
         android:id="@+id/navigation_top"
         android:icon="@drawable/ic_baseline_star_24"
-        android:title="Top" />
+        android:title="@string/title_top" />
 
     <item
         android:id="@+id/navigation_latest"
         android:icon="@drawable/ic_baseline_fiber_new_24"
-        android:title="Latest" />
+        android:title="@string/title_latest" />
 
 </menu>
