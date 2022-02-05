@@ -15,6 +15,7 @@ import com.fintech.ozmaden_developerslife.utils.GifLoader
 abstract class PostFragment : Fragment() {
 
     protected lateinit var viewModel: PostViewModel
+
     private var _binding: FragmentPostBinding? = null
 
     // This property is only valid between onCreateView and
@@ -26,11 +27,10 @@ abstract class PostFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = setUpViewModel()
 
         _binding = FragmentPostBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        setUpViewModel()
 
         viewModel.post.observe(viewLifecycleOwner, Observer {
             updatePost(it)
@@ -62,7 +62,7 @@ abstract class PostFragment : Fragment() {
         return root
     }
 
-    protected abstract fun setUpViewModel()
+    protected abstract fun setUpViewModel(): PostViewModel
 
     private fun nextPost() {
         hidePost()

@@ -46,7 +46,7 @@ abstract class PostViewModel : ViewModel() {
                     loadNewPost()
                 }
             } catch (e: Exception) {
-                Log.w("PageViewModel", e.message.toString())
+                Log.w("PostViewModel", e.message.toString())
             }
         }
     }
