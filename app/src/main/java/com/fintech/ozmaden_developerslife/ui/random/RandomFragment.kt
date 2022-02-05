@@ -56,14 +56,15 @@ class RandomFragment : Fragment() {
 
         val textView: TextView = binding.text
 
-        viewModel.description.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        viewModel.description.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
 
         val gifView: ImageView = binding.gif
 
         viewModel.post.observe(viewLifecycleOwner, Observer {
             GifLoader.loadImage(it.gifURL, gifView)
+            textView.text = it.description
         })
 
         return root
