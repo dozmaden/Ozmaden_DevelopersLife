@@ -53,11 +53,11 @@ internal abstract class PostFragment : Fragment() {
                 binding.apply { gif.load(it.previewURL) }
                 binding.apply {
                     gif.load(it.gifURL) {
-                        //                        if (it.gifSize > 5242880 ){
-                        //                            placeholder(R.drawable.ic_baseline_loop_24)
-                        //                        }
+                        if (it.gifSize > 7340032) {
+                            placeholder(R.drawable.ic_baseline_loop_24)
+                        }
                         crossfade(true)
-                        crossfade(300)
+                        crossfade(150)
                         scale(Scale.FILL)
                     }
                     text.text = it.description
