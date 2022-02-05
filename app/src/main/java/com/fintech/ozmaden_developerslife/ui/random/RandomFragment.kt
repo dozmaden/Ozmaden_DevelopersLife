@@ -6,6 +6,6 @@ import com.fintech.ozmaden_developerslife.ui.PostFragment
 class RandomFragment : PostFragment() {
     override fun setUpViewModel() {
         viewModel =
-            ViewModelProvider(this).get(RandomPostViewModel::class.java)
+            ViewModelProvider(this)[RandomPostViewModel::class.java]
     }
 }

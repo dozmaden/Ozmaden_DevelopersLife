@@ -6,6 +6,6 @@ import com.fintech.ozmaden_developerslife.ui.PostFragment
 class LatestFragment : PostFragment() {
     override fun setUpViewModel() {
         viewModel =
-            ViewModelProvider(this).get(LatestPostViewModel::class.java)
+            ViewModelProvider(this)[LatestPostViewModel::class.java]
     }
 }
