@@ -8,7 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.fintech.ozmaden_developerslife.R
 
 class GifLoader {
-    companion object{
+    companion object {
         fun loadImage(gifUrl: String, gifView: ImageView) {
             val safeUrl = gifUrl.replace("http", "https")
 

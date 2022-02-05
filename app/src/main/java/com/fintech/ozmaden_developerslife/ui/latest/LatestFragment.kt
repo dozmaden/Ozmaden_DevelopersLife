@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.fintech.ozmaden_developerslife.databinding.FragmentLatestBinding
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
 import com.fintech.ozmaden_developerslife.model.Post
 import com.fintech.ozmaden_developerslife.utils.GifLoader

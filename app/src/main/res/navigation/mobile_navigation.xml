@@ -9,21 +9,21 @@
         android:id="@+id/navigation_random"
         android:name="com.fintech.ozmaden_developerslife.ui.random.RandomFragment"
         android:label="Random"
-        tools:layout="@layout/fragment_post"
-        tools:context=".ui.random.RandomFragment"/>
+        tools:context=".ui.random.RandomFragment"
+        tools:layout="@layout/fragment_post" />
 
     <fragment
         android:id="@+id/navigation_top"
         android:name="com.fintech.ozmaden_developerslife.ui.top.TopFragment"
         android:label="Top"
-        tools:layout="@layout/fragment_post"
-        tools:context=".ui.top.TopFragment"/>
+        tools:context=".ui.top.TopFragment"
+        tools:layout="@layout/fragment_post" />
 
     <fragment
         android:id="@+id/navigation_latest"
         android:name="com.fintech.ozmaden_developerslife.ui.latest.LatestFragment"
         android:label="Latest"
-        tools:layout="@layout/fragment_post"
-        tools:context=".ui.latest.LatestFragment"/>
+        tools:context=".ui.latest.LatestFragment"
+        tools:layout="@layout/fragment_post" />
 
 </navigation>
