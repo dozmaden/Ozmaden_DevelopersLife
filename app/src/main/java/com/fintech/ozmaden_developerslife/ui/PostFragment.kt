@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import coil.load
@@ -45,7 +46,8 @@ internal abstract class PostFragment : Fragment() {
             {
                 setPostPreview(it)
                 binding.text.text = it.description
-                binding.author.text = it.author
+                binding.author.text = "Автор: " + it.author
+                binding.textDate.text = it.date
                 loadPostGif(it)
                 updatePreviousBtn()
             }
@@ -53,17 +55,20 @@ internal abstract class PostFragment : Fragment() {
     }
 
     private fun setPostPreview(post: Post) {
-        binding.apply { preview.load(post.previewURL) { scale(Scale.FILL) } }
+        binding.apply {
+//            preview.visibility = View.VISIBLE
+            preview.load(post.previewURL) { scale(Scale.FILL) }
+        }
     }
 
     private fun loadPostGif(post: Post) {
         binding.apply {
             gif.load(post.gifURL) {
-                //                placeholder(R.drawable.ic_baseline_loop_24)
                 crossfade(true)
                 crossfade(150)
                 scale(Scale.FILL)
             }
+//            preview.visibility = View.GONE
         }
     }
 
