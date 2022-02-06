@@ -10,6 +10,7 @@ import coil.load
 import coil.size.Scale
 import com.fintech.ozmaden_developerslife.R
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
+import com.fintech.ozmaden_developerslife.model.Post
 
 internal abstract class PostFragment : Fragment() {
 
@@ -28,7 +29,7 @@ internal abstract class PostFragment : Fragment() {
         _binding = FragmentPostBinding.inflate(inflater, container, false)
         viewModel = setUpViewModel()
 
-        setObserver()
+        setPostObserver()
         setFailObserver()
         setBtnClickListeners()
         startFeed()
@@ -44,24 +45,31 @@ internal abstract class PostFragment : Fragment() {
         }
     }
 
-    private fun setObserver() {
+    private fun setPostObserver() {
         viewModel.post.observe(
             viewLifecycleOwner,
             {
-                binding.apply {
-                    gif.load(it.gifURL) {
-                        if (it.gifSize > 7340032) {
-                            placeholder(R.drawable.ic_baseline_loop_24)
-                        }
-                        crossfade(true)
-                        crossfade(150)
-                        scale(Scale.FILL)
-                    }
-                    text.text = it.description
-                }
+                setPostPreview(it)
+                binding.text.text = it.description
+                loadPostGif(it)
                 updatePreviousBtn()
             }
         )
+    }
+
+    private fun setPostPreview(post: Post) {
+        binding.apply { preview.load(post.previewURL) { scale(Scale.FILL) } }
+    }
+
+    private fun loadPostGif(post: Post) {
+        binding.apply {
+            gif.load(post.gifURL) {
+//                placeholder(R.drawable.ic_baseline_loop_24)
+                crossfade(true)
+                crossfade(150)
+                scale(Scale.FILL)
+            }
+        }
     }
 
     private fun setFailObserver() {
