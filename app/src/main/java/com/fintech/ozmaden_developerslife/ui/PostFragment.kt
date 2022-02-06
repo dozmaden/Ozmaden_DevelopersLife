@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import coil.load
-import coil.size.Scale
+import com.fintech.ozmaden_developerslife.GifLoader
 import com.fintech.ozmaden_developerslife.R
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
 import com.fintech.ozmaden_developerslife.model.Post
@@ -43,26 +42,32 @@ internal abstract class PostFragment : Fragment() {
         viewModel.post.observe(
             viewLifecycleOwner,
             {
-                setPostPreview(it)
                 binding.text.text = it.description
-                loadPostGif(it)
+                binding.author.text = "Автор: " + it.author
+                binding.textDate.text = it.date
+                renderPostGif(it)
                 updatePreviousBtn()
             }
         )
     }
 
-    private fun setPostPreview(post: Post) {
-        binding.apply { preview.load(post.previewURL) { scale(Scale.FILL) } }
-    }
-
-    private fun loadPostGif(post: Post) {
+    private fun renderPostGif(post: Post) {
         binding.apply {
-            gif.load(post.gifURL) {
-                //                placeholder(R.drawable.ic_baseline_loop_24)
-                crossfade(true)
-                crossfade(150)
-                scale(Scale.FILL)
-            }
+            //            binding.card.visibility = View.GONE
+            //            binding.shimmerViewContainer.visibility = View.VISIBLE
+            //            binding.shimmerViewContainer.startShimmer()
+
+            GifLoader.loadImage(gif, post)
+
+            //            binding.shimmerViewContainer.visibility = View.VISIBLE
+
+            //            binding.shimmerViewContainer.stopShimmer()
+            //            binding.shimmerViewContainer.visibility = View.GONE
+            //            binding.card.visibility = View.VISIBLE
+            //            preview.visibility = View.GONE
+
+            //            shimmerViewContainer.stopShimmer()
+            //            shimmerViewContainer.clearAnimation()
         }
     }
 
