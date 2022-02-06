@@ -3,6 +3,8 @@
     <string name="title_random">Random</string>
     <string name="title_top">Top</string>
     <string name="title_latest">Latest</string>
-    <string name="tryAgain">ПОВТОРИТЬ</string>
-    <string name="tryAgainDescription">Произошла ошибка при загрузке данных. Проверьте подключение к сети.</string>
+    <string name="title_hot">Hot</string>
+    <string name="retry">Retry</string>
+    <string name="retry_description">Произошла ошибка при загрузке данных. Проверьте подключение к сети.</string>
+    <string name="author">Автор %s</string>
 </resources>

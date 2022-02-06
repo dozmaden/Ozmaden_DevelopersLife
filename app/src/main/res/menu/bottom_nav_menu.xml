@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_baseline_fiber_new_24"
         android:title="@string/title_latest" />
 
+    <item
+        android:id="@+id/navigation_hot"
+        android:icon="@drawable/ic_baseline_whatshot_24"
+        android:title="@string/title_hot" />
+
 </menu>

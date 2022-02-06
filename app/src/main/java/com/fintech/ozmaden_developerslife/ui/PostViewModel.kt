@@ -4,8 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.fintech.ozmaden_developerslife.model.Post
-import com.fintech.ozmaden_developerslife.repository.PostRepository
+import com.fintech.ozmaden_developerslife.dto.Post
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
@@ -17,27 +16,29 @@ internal abstract class PostViewModel : ViewModel() {
     protected val _post = MutableLiveData<Post>()
     internal val post: LiveData<Post> = _post
 
-    protected val _description = MutableLiveData<String>()
-    internal val description: LiveData<String> = _description
-
     protected val loadingFail = MutableLiveData<Boolean>()
     internal val onLoadFail: LiveData<Boolean> = loadingFail
 
-    protected val postRepository = PostRepository()
-
     protected val postHistory = mutableListOf<Post>()
     internal var position: Int = -1
+
+    protected abstract fun loadNewPost()
+
+    protected fun Disposable.onBind() = disposables.add(this)
 
     override fun onCleared() {
         disposables.dispose()
         super.onCleared()
     }
 
-    internal fun nextPost() {
-        loadPost()
+    internal fun loadPrevPost() {
+        if (position > 0) {
+            position--
+            _post.postValue(postHistory.elementAt(position))
+        }
     }
 
-    private fun loadPost() {
+    internal fun loadNextPost() {
         try {
             // если пост уже загружался, то просто двигаемся
             if (postHistory.size - position > 1) {
@@ -57,16 +58,4 @@ internal abstract class PostViewModel : ViewModel() {
         val oldPost = postHistory.elementAt(position)
         _post.postValue(oldPost)
     }
-
-    protected abstract fun loadNewPost()
-
-    internal fun previousPost() {
-        if (position > 0) {
-            position--
-            val oldPost = postHistory.elementAt(position)
-            _post.postValue(oldPost)
-        }
-    }
-
-    protected fun Disposable.onBind() = disposables.add(this)
 }

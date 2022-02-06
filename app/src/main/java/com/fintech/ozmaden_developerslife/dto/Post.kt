@@ -1,6 +1,8 @@
-package com.fintech.ozmaden_developerslife.model
+package com.fintech.ozmaden_developerslife.dto
 
-data class Post(
+internal data class PostListResponse(val result: List<Post>, val totalCount: Int)
+
+internal data class Post(
     val id: Int,
     val description: String,
     val votes: Int,

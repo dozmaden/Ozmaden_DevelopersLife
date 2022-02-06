@@ -1,18 +1,21 @@
 package com.fintech.ozmaden_developerslife.repository
 
 import com.fintech.ozmaden_developerslife.api.NetworkInstance
-import com.fintech.ozmaden_developerslife.model.Post
-import com.fintech.ozmaden_developerslife.model.PostsWrapper
+import com.fintech.ozmaden_developerslife.dto.Post
+import com.fintech.ozmaden_developerslife.dto.PostListResponse
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-internal class PostRepository {
+internal object PostRepository {
+
     private val api = NetworkInstance.api
 
     /** Возвращает рандомный [Post] */
-    fun getRandomPost(): Single<Post> = api.getRandomPost().subscribeOn(Schedulers.io())
+    internal fun getRandomPost(): Single<Post> = api.getRandomPost().subscribeOn(Schedulers.io())
 
     /** Возвращает лист [Post] из выбранной категории */
-    fun getCategoryPosts(category: String, page: Int): Single<List<Post>> =
-        api.getCategoryPosts(category, page).subscribeOn(Schedulers.io()).map(PostsWrapper::result)
+    internal fun getCategoryPosts(category: String, page: Int): Single<List<Post>> =
+        api.getCategoryPosts(category, page)
+            .subscribeOn(Schedulers.io())
+            .map(PostListResponse::result)
 }

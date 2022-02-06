@@ -1,12 +1,12 @@
-package com.fintech.ozmaden_developerslife.ui.latest
+package com.fintech.ozmaden_developerslife.ui.hot
 
 import androidx.lifecycle.ViewModelProvider
 import com.fintech.ozmaden_developerslife.ui.CategoryPostViewModel
 import com.fintech.ozmaden_developerslife.ui.PostFragment
 
-private const val CATEGORY = "latest"
+private const val CATEGORY = "hot"
 
-internal class LatestFragment : PostFragment() {
+internal class HotFragment : PostFragment() {
 
     override fun viewModel() =
         CategoryPostViewModel.Factory(CATEGORY).let { factory ->

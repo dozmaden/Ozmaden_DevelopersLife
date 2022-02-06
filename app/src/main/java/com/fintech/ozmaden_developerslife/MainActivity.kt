@@ -9,7 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.fintech.ozmaden_developerslife.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+internal class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 

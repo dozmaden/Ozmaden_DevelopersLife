@@ -5,12 +5,12 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.fintech.ozmaden_developerslife.model.Post
+import com.fintech.ozmaden_developerslife.dto.Post
 
 internal class GifLoader {
     companion object {
         fun loadImage(img: ImageView, post: Post) {
-            post?.let {
+            post.let {
                 val progressCircle = CircularProgressDrawable(img.context)
                 progressCircle.strokeWidth = 10f
                 progressCircle.centerRadius = 40f

@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val ENDPOINT = "https://developerslife.ru/"
+private const val BASE_URL = "https://developerslife.ru/"
 
 internal object NetworkInstance {
 
@@ -20,7 +20,7 @@ internal object NetworkInstance {
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .baseUrl(ENDPOINT)
+            .baseUrl(BASE_URL)
             .build()
 
     val api: Api = retrofit.create(Api::class.java)

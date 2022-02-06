@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.fintech.ozmaden_developerslife.GifLoader
-import com.fintech.ozmaden_developerslife.R
+import com.fintech.ozmaden_developerslife.R.string as strings
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
-import com.fintech.ozmaden_developerslife.model.Post
+import com.fintech.ozmaden_developerslife.databinding.ItemErrorBinding
+import com.fintech.ozmaden_developerslife.ext.isVisible
 
 /** Главный фрагмент, где происходит основная работа с постами. */
 internal abstract class PostFragment : Fragment() {
 
-    protected lateinit var viewModel: PostViewModel
+    private lateinit var viewModel: PostViewModel
+    private lateinit var binding: FragmentPostBinding
+    private lateinit var errorBinding: ItemErrorBinding
 
-    private var _binding: FragmentPostBinding? = null
-    private val binding
-        get() = _binding!!
+    protected abstract fun viewModel(): PostViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,91 +26,56 @@ internal abstract class PostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentPostBinding.inflate(inflater, container, false)
-        viewModel = setUpViewModel()
+        binding = FragmentPostBinding.inflate(inflater, container, false)
+        errorBinding = ItemErrorBinding.bind(binding.root)
+
+        viewModel = viewModel()
 
         setPostObserver()
         setFailObserver()
-        setBtnClickListeners()
-        startFeed()
+        initClickListeners()
+
+        if (viewModel.position < 0) {
+            viewModel.loadNextPost()
+        }
 
         return binding.root
     }
 
-    protected abstract fun setUpViewModel(): PostViewModel
-
     private fun setPostObserver() {
-        viewModel.post.observe(
-            viewLifecycleOwner,
-            {
-                binding.apply {
-                    text.text = it.description
-                    binding.author.text = "Автор: " + it.author
-                    binding.textDate.text = it.date
-                }
-                renderPostGif(it)
-                updatePreviousBtn()
-            }
-        )
-    }
+        viewModel.post.observe(viewLifecycleOwner) { post ->
+            binding.postTitle.text = post.description
+            binding.author.text = getString(strings.author, post.author)
+            binding.textDate.text = post.date
 
-    private fun renderPostGif(post: Post) {
-        binding.apply {
-            // использую глайд
-            GifLoader.loadImage(gif, post)
+            GifLoader.loadImage(binding.gif, post)
+            renderPreviousButton()
         }
     }
 
-    /** Если происходит ошибка, то перемещаемся во фрагмент ошибки. */
     private fun setFailObserver() {
-        viewModel.onLoadFail.observe(
-            viewLifecycleOwner,
-            {
-                if (it == true) {
-                    this.view?.let {
-                        findNavController().navigate(R.id.action_postFragment_to_errorFragment)
-                    }
-                }
-            }
-        )
-    }
-
-    private fun setBtnClickListeners() {
-        binding.apply {
-            nextBtn.setOnClickListener { nextPost() }
-            prevBtn.setOnClickListener { previousPost() }
+        viewModel.onLoadFail.observe(viewLifecycleOwner) { isFail ->
+            binding.next.isEnabled = isFail != true
+            binding.previous.isEnabled = isFail != true
+            binding.card.isVisible = isFail != true
+            errorBinding.errorGroup.isVisible = isFail == true
         }
     }
 
-    private fun nextPost() {
-        viewModel.nextPost()
+    private fun initClickListeners() {
+        binding.next.setOnClickListener { viewModel.loadNextPost() }
+        binding.previous.setOnClickListener { viewModel.loadPrevPost() }
+        errorBinding.errorRetry.setOnClickListener { viewModel.loadNextPost() }
     }
 
-    private fun previousPost() {
-        viewModel.previousPost()
-    }
+    private fun renderPreviousButton() =
+        (viewModel.position > 0).let { predicate ->
+            binding.previous.isEnabled = predicate
 
-    /** Проверяет, нужно ли спрятать кнопку "Обратно" или нет */
-    private fun updatePreviousBtn() {
-        binding.apply {
-            if (viewModel.position > 0) {
-                prevBtn.isEnabled = true
-                prevBtn.show()
+            if (predicate) {
+                binding.previous.show()
             } else {
-                prevBtn.isEnabled = false
-                prevBtn.hide()
+                binding.previous.hide()
             }
         }
-    }
-
-    private fun startFeed() {
-        if (viewModel.position < 0) {
-            nextPost()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

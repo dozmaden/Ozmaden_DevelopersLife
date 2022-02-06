@@ -1,7 +1,7 @@
 package com.fintech.ozmaden_developerslife.api
 
-import com.fintech.ozmaden_developerslife.model.Post
-import com.fintech.ozmaden_developerslife.model.PostsWrapper
+import com.fintech.ozmaden_developerslife.dto.Post
+import com.fintech.ozmaden_developerslife.dto.PostListResponse
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -13,5 +13,5 @@ internal interface Api {
     fun getCategoryPosts(
         @Path("category") category: String,
         @Path("page") page: Int
-    ): Single<PostsWrapper>
+    ): Single<PostListResponse>
 }

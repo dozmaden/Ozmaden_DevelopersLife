@@ -10,52 +10,24 @@
         android:id="@+id/navigation_random"
         android:name="com.fintech.ozmaden_developerslife.ui.random.RandomFragment"
         tools:context=".ui.random.RandomFragment"
-        tools:layout="@layout/fragment_post">
-        <action
-            android:id="@+id/action_postFragment_to_errorFragment"
-            app:destination="@id/navigation_error"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/mobile_navigation" />
-    </fragment>
+        tools:layout="@layout/fragment_post" />
 
     <fragment
         android:id="@+id/navigation_top"
         android:name="com.fintech.ozmaden_developerslife.ui.top.TopFragment"
         tools:context=".ui.top.TopFragment"
-        tools:layout="@layout/fragment_post">
-        <action
-            android:id="@+id/action_postFragment_to_errorFragment"
-            app:destination="@id/navigation_error"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/mobile_navigation" />
-    </fragment>
+        tools:layout="@layout/fragment_post" />
 
     <fragment
         android:id="@+id/navigation_latest"
         android:name="com.fintech.ozmaden_developerslife.ui.latest.LatestFragment"
         tools:context=".ui.latest.LatestFragment"
-        tools:layout="@layout/fragment_post">
-        <action
-            android:id="@+id/action_postFragment_to_errorFragment"
-            app:destination="@id/navigation_error"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/mobile_navigation" />
-    </fragment>
+        tools:layout="@layout/fragment_post" />
 
     <fragment
-        android:id="@+id/navigation_error"
-        android:name="com.fintech.ozmaden_developerslife.ui.error.ErrorFragment"
-        tools:context=".ui.error.ErrorFragment"
-        tools:layout="@layout/fragment_error">
-        <action
-            android:id="@+id/action_errorFragment_to_topFragment"
-            app:destination="@id/navigation_top"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/mobile_navigation" />
-    </fragment>
+        android:id="@+id/navigation_hot"
+        android:name="com.fintech.ozmaden_developerslife.ui.hot.HotFragment"
+        tools:context=".ui.hot.HotFragment"
+        tools:layout="@layout/fragment_post" />
 
 </navigation>
