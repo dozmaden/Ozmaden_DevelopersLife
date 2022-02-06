@@ -11,6 +11,7 @@ import com.fintech.ozmaden_developerslife.R
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
 import com.fintech.ozmaden_developerslife.model.Post
 
+/** Главный фрагмент, где происходит основная работа с постами. */
 internal abstract class PostFragment : Fragment() {
 
     protected lateinit var viewModel: PostViewModel
@@ -42,9 +43,11 @@ internal abstract class PostFragment : Fragment() {
         viewModel.post.observe(
             viewLifecycleOwner,
             {
-                binding.text.text = it.description
-                binding.author.text = "Автор: " + it.author
-                binding.textDate.text = it.date
+                binding.apply {
+                    text.text = it.description
+                    binding.author.text = "Автор: " + it.author
+                    binding.textDate.text = it.date
+                }
                 renderPostGif(it)
                 updatePreviousBtn()
             }
@@ -53,24 +56,12 @@ internal abstract class PostFragment : Fragment() {
 
     private fun renderPostGif(post: Post) {
         binding.apply {
-            //            binding.card.visibility = View.GONE
-            //            binding.shimmerViewContainer.visibility = View.VISIBLE
-            //            binding.shimmerViewContainer.startShimmer()
-
+            // использую глайд
             GifLoader.loadImage(gif, post)
-
-            //            binding.shimmerViewContainer.visibility = View.VISIBLE
-
-            //            binding.shimmerViewContainer.stopShimmer()
-            //            binding.shimmerViewContainer.visibility = View.GONE
-            //            binding.card.visibility = View.VISIBLE
-            //            preview.visibility = View.GONE
-
-            //            shimmerViewContainer.stopShimmer()
-            //            shimmerViewContainer.clearAnimation()
         }
     }
 
+    /** Если происходит ошибка, то перемещаемся во фрагмент ошибки. */
     private fun setFailObserver() {
         viewModel.onLoadFail.observe(
             viewLifecycleOwner,
@@ -99,6 +90,7 @@ internal abstract class PostFragment : Fragment() {
         viewModel.previousPost()
     }
 
+    /** Проверяет, нужно ли спрятать кнопку "Обратно" или нет */
     private fun updatePreviousBtn() {
         binding.apply {
             if (viewModel.position > 0) {

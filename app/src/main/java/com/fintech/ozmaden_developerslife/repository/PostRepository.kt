@@ -9,8 +9,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 internal class PostRepository {
     private val api = NetworkInstance.api
 
+    /** Возвращает рандомный [Post] */
     fun getRandomPost(): Single<Post> = api.getRandomPost().subscribeOn(Schedulers.io())
 
+    /** Возвращает лист [Post] из выбранной категории */
     fun getCategoryPosts(category: String, page: Int): Single<List<Post>> =
         api.getCategoryPosts(category, page).subscribeOn(Schedulers.io()).map(PostsWrapper::result)
 }

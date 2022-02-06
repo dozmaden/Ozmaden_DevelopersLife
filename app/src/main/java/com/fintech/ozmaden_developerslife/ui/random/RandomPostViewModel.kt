@@ -5,7 +5,13 @@ import com.fintech.ozmaden_developerslife.ui.PostViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.subscribeBy
 
+/** ViewModel для рандомных постов */
 internal class RandomPostViewModel : PostViewModel() {
+
+    /**
+     * Функция загрузки рандомного поста. Основное отличие от [CategoryPostViewModel] состоит в том,
+     * что здесь добавляется только 1 пост и не учитывается страница.
+     */
     override fun loadNewPost() {
         try {
             postRepository

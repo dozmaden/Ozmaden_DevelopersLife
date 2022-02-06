@@ -5,6 +5,7 @@ import com.fintech.ozmaden_developerslife.ui.CategoryPostViewModel
 import com.fintech.ozmaden_developerslife.ui.PostFragment
 import com.fintech.ozmaden_developerslife.ui.PostViewModel
 
+/** Фрагмент топовых постов Передаёт в [CategoryPostViewModel] свою категорию. */
 internal class TopFragment : PostFragment() {
     override fun setUpViewModel(): PostViewModel {
         val viewModelFactory = CategoryPostViewModel.Factory("top")

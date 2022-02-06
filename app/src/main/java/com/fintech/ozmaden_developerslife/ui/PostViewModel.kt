@@ -9,6 +9,7 @@ import com.fintech.ozmaden_developerslife.repository.PostRepository
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
+/** Основной ViewModel для работы с постами. */
 internal abstract class PostViewModel : ViewModel() {
 
     private val disposables = CompositeDisposable()
@@ -38,6 +39,7 @@ internal abstract class PostViewModel : ViewModel() {
 
     private fun loadPost() {
         try {
+            // если пост уже загружался, то просто двигаемся
             if (postHistory.size - position > 1) {
                 loadCachedPost()
             } else {
