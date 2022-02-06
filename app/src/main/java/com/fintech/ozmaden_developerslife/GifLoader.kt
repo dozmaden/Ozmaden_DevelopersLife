@@ -5,7 +5,6 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import com.facebook.shimmer.ShimmerDrawable
 import com.fintech.ozmaden_developerslife.model.Post
 
 internal class GifLoader {
@@ -17,18 +16,15 @@ internal class GifLoader {
                 progressCircle.centerRadius = 40f
                 progressCircle.start()
 
-                val shimmer = ShimmerDrawable()
-
                 Glide.with(img.context)
                     .load(post.gifURL)
                     .thumbnail(Glide.with(img.context).load(post.previewURL))
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .apply(
                         RequestOptions()
-                            .placeholder(shimmer)
+                            .placeholder(progressCircle)
                             .error(R.drawable.ic_baseline_broken_image_24)
                     )
-                    .centerCrop()
                     .into(img)
             }
         }

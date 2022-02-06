@@ -22,19 +22,11 @@
             android:layout_height="match_parent"
             android:background="@drawable/text_gradient">
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmer_view_container"
+            <ImageView
+                android:id="@+id/gif"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:shimmer_auto_start="false">
-
-                <ImageView
-                    android:id="@+id/gif"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/text"
