@@ -22,17 +22,25 @@
             android:layout_height="match_parent"
             android:background="@drawable/text_gradient">
 
-            <ImageView
-                android:id="@+id/preview"
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                app:shimmer_auto_start="false">
 
-            <ImageView
-                android:id="@+id/gif"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                <ImageView
+                    android:id="@+id/preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/gif"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <TextView
                 android:id="@+id/text"
@@ -61,10 +69,10 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="@tools:sample/lorem"
                 app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintWidth="0dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth="0dp"
+                tools:text="@tools:sample/lorem" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -97,7 +105,6 @@
         android:layout_height="0dp"
         android:layout_margin="24dp"
         android:contentDescription="TODO"
-        app:backgroundTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/prev_btn"
@@ -110,7 +117,6 @@
         android:layout_margin="24dp"
         android:contentDescription="TODO"
         android:visibility="gone"
-        app:backgroundTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next_btn"
         app:layout_constraintHorizontal_chainStyle="packed"

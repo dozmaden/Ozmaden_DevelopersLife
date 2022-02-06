@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import coil.load
-import coil.size.Scale
+import com.fintech.ozmaden_developerslife.GifLoader
 import com.fintech.ozmaden_developerslife.R
 import com.fintech.ozmaden_developerslife.databinding.FragmentPostBinding
 import com.fintech.ozmaden_developerslife.model.Post
@@ -45,30 +43,45 @@ internal abstract class PostFragment : Fragment() {
             viewLifecycleOwner,
             {
                 setPostPreview(it)
+
                 binding.text.text = it.description
                 binding.author.text = "Автор: " + it.author
                 binding.textDate.text = it.date
-                loadPostGif(it)
+
+                renderPostGif(it)
                 updatePreviousBtn()
             }
         )
     }
 
     private fun setPostPreview(post: Post) {
-        binding.apply {
-//            preview.visibility = View.VISIBLE
-            preview.load(post.previewURL) { scale(Scale.FILL) }
-        }
+//        binding.apply { gif.load(post.previewURL) { scale(Scale.FILL) } }
+//        ImageLoader().loadImage(binding.gif, post.gifURL)
     }
 
-    private fun loadPostGif(post: Post) {
+    private fun renderPostGif(post: Post) {
         binding.apply {
-            gif.load(post.gifURL) {
-                crossfade(true)
-                crossfade(150)
-                scale(Scale.FILL)
-            }
-//            preview.visibility = View.GONE
+            //            binding.card.visibility = View.GONE
+            //            binding.shimmerViewContainer.visibility = View.VISIBLE
+            //            binding.shimmerViewContainer.startShimmer()
+
+//            gif.load(post.gifURL) {
+//                crossfade(true)
+//                crossfade(150)
+//                scale(Scale.FILL)
+//            }
+
+            GifLoader().loadImage(gif, post)
+
+            //            binding.shimmerViewContainer.visibility = View.VISIBLE
+
+            //            binding.shimmerViewContainer.stopShimmer()
+            //            binding.shimmerViewContainer.visibility = View.GONE
+            //            binding.card.visibility = View.VISIBLE
+            //            preview.visibility = View.GONE
+
+            //            shimmerViewContainer.stopShimmer()
+            //            shimmerViewContainer.clearAnimation()
         }
     }
 
