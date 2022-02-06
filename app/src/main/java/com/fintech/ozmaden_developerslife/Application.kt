@@ -11,7 +11,7 @@ import coil.request.CachePolicy
 class MyApplication : Application(), ImageLoaderFactory {
     override fun newImageLoader(): ImageLoader {
         return ImageLoader.Builder(this)
-//            .crossfade(true)
+            //            .crossfade(true)
             .diskCachePolicy(CachePolicy.ENABLED)
             .componentRegistry {
                 if (Build.VERSION.SDK_INT >= 28) {

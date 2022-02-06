@@ -64,7 +64,7 @@ internal abstract class PostFragment : Fragment() {
     private fun loadPostGif(post: Post) {
         binding.apply {
             gif.load(post.gifURL) {
-//                placeholder(R.drawable.ic_baseline_loop_24)
+                //                placeholder(R.drawable.ic_baseline_loop_24)
                 crossfade(true)
                 crossfade(150)
                 scale(Scale.FILL)
