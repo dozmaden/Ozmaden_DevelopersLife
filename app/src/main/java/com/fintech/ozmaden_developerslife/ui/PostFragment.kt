@@ -42,21 +42,13 @@ internal abstract class PostFragment : Fragment() {
         viewModel.post.observe(
             viewLifecycleOwner,
             {
-                setPostPreview(it)
-
                 binding.text.text = it.description
                 binding.author.text = "Автор: " + it.author
                 binding.textDate.text = it.date
-
                 renderPostGif(it)
                 updatePreviousBtn()
             }
         )
-    }
-
-    private fun setPostPreview(post: Post) {
-//        binding.apply { gif.load(post.previewURL) { scale(Scale.FILL) } }
-//        ImageLoader().loadImage(binding.gif, post.gifURL)
     }
 
     private fun renderPostGif(post: Post) {
@@ -65,13 +57,7 @@ internal abstract class PostFragment : Fragment() {
             //            binding.shimmerViewContainer.visibility = View.VISIBLE
             //            binding.shimmerViewContainer.startShimmer()
 
-//            gif.load(post.gifURL) {
-//                crossfade(true)
-//                crossfade(150)
-//                scale(Scale.FILL)
-//            }
-
-            GifLoader().loadImage(gif, post)
+            GifLoader.loadImage(gif, post)
 
             //            binding.shimmerViewContainer.visibility = View.VISIBLE
 
