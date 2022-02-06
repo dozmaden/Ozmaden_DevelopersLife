@@ -1,5 +1,3 @@
-@file:Suppress("PropertyName")
-
 package com.fintech.ozmaden_developerslife.ui
 
 import android.util.Log
@@ -15,20 +13,19 @@ internal abstract class PostViewModel : ViewModel() {
 
     private val disposables = CompositeDisposable()
 
-    protected val postRepository = PostRepository()
-
     protected val _post = MutableLiveData<Post>()
     internal val post: LiveData<Post> = _post
 
     protected val _description = MutableLiveData<String>()
     internal val description: LiveData<String> = _description
 
+    protected val loadingFail = MutableLiveData<Boolean>()
+    internal val onLoadFail: LiveData<Boolean> = loadingFail
+
+    protected val postRepository = PostRepository()
+
     protected val postHistory = mutableListOf<Post>()
     internal var position: Int = -1
-
-    protected val loadingFail = MutableLiveData<Boolean>()
-    internal val onLoadFail: LiveData<Boolean>
-        get() = loadingFail
 
     override fun onCleared() {
         disposables.dispose()
@@ -41,7 +38,7 @@ internal abstract class PostViewModel : ViewModel() {
 
     private fun loadPost() {
         try {
-            if (postHistory.size > position + 1) {
+            if (postHistory.size - position > 1) {
                 loadCachedPost()
             } else {
                 loadNewPost()

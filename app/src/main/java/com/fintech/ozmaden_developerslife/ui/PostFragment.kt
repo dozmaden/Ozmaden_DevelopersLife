@@ -39,12 +39,6 @@ internal abstract class PostFragment : Fragment() {
 
     protected abstract fun setUpViewModel(): PostViewModel
 
-    private fun startFeed() {
-        if (viewModel.position < 0) {
-            nextPost()
-        }
-    }
-
     private fun setPostObserver() {
         viewModel.post.observe(
             viewLifecycleOwner,
@@ -109,6 +103,12 @@ internal abstract class PostFragment : Fragment() {
                 prevBtn.isEnabled = false
                 prevBtn.hide()
             }
+        }
+    }
+
+    private fun startFeed() {
+        if (viewModel.position < 0) {
+            nextPost()
         }
     }
 
