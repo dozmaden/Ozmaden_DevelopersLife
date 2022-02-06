@@ -45,6 +45,7 @@ internal abstract class PostFragment : Fragment() {
             {
                 setPostPreview(it)
                 binding.text.text = it.description
+                binding.author.text = it.author
                 loadPostGif(it)
                 updatePreviousBtn()
             }

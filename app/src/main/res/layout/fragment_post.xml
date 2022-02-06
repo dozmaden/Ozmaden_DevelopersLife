@@ -17,12 +17,30 @@
         app:layout_constraintBottom_toTopOf="@id/next_btn"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:padding="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"
+            tools:text="Author" />
+
         <ImageView
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="TODO"
             android:scaleType="centerCrop" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scrollbarSize="22dp"
+            android:layout_margin="16dp" />
 
         <ImageView
             android:id="@+id/gif"
@@ -35,7 +53,7 @@
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="bottom|start"
             android:background="@drawable/text_gradient"
             android:padding="8dp"
             android:textColor="@android:color/white"
