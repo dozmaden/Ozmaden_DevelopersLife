@@ -3,23 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    android:label="@string/app_name"
+    app:startDestination="@+id/navigation_top">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.fintech.ozmaden_developerslife.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_random"
+        android:name="com.fintech.ozmaden_developerslife.ui.random.RandomFragment"
+        tools:context=".ui.random.RandomFragment"
+        tools:layout="@layout/fragment_post">
+        <action
+            android:id="@+id/action_postFragment_to_errorFragment"
+            app:destination="@id/navigation_error"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mobile_navigation" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.fintech.ozmaden_developerslife.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_top"
+        android:name="com.fintech.ozmaden_developerslife.ui.top.TopFragment"
+        tools:context=".ui.top.TopFragment"
+        tools:layout="@layout/fragment_post">
+        <action
+            android:id="@+id/action_postFragment_to_errorFragment"
+            app:destination="@id/navigation_error"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mobile_navigation" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.fintech.ozmaden_developerslife.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_latest"
+        android:name="com.fintech.ozmaden_developerslife.ui.latest.LatestFragment"
+        tools:context=".ui.latest.LatestFragment"
+        tools:layout="@layout/fragment_post">
+        <action
+            android:id="@+id/action_postFragment_to_errorFragment"
+            app:destination="@id/navigation_error"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mobile_navigation" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_error"
+        android:name="com.fintech.ozmaden_developerslife.ui.error.ErrorFragment"
+        tools:context=".ui.error.ErrorFragment"
+        tools:layout="@layout/fragment_error">
+        <action
+            android:id="@+id/action_errorFragment_to_topFragment"
+            app:destination="@id/navigation_top"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mobile_navigation" />
+    </fragment>
+
 </navigation>

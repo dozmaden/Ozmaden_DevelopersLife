@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Denis/AndroidStudioProjects/Ozmaden_DevelopersLife/app/src/main/res/layout/activity_main.xml" value="0.12454710144927536" />
+        <entry key="..\:/Users/Denis/AndroidStudioProjects/Ozmaden_DevelopersLife/app/src/main/res/layout/fragment_dashboard.xml" value="0.12454710144927536" />
+        <entry key="..\:/Users/Denis/AndroidStudioProjects/Ozmaden_DevelopersLife/app/src/main/res/layout/fragment_home.xml" value="0.1334853090172239" />
+        <entry key="..\:/Users/Denis/AndroidStudioProjects/Ozmaden_DevelopersLife/app/src/main/res/layout/fragment_notifications.xml" value="0.12454710144927536" />
+        <entry key="..\:/Users/Denis/AndroidStudioProjects/Ozmaden_DevelopersLife/app/src/main/res/layout/fragment_random.xml" value="0.2" />
+        <entry key="..\:/Users/Denis/AndroidStudioProjects/Ozmaden_DevelopersLife/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25462962962962965" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

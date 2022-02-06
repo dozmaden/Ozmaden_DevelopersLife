@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Ozmaden_DevelopersLife</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">Developer life</string>
+    <string name="title_random">Random</string>
+    <string name="title_top">Top</string>
+    <string name="title_latest">Latest</string>
+    <string name="tryAgain">ПОВТОРИТЬ</string>
+    <string name="tryAgainDescription">Произошла ошибка при загрузке данных. Проверьте подключение к сети.</string>
 </resources>

@@ -1,8 +1,7 @@
 package com.fintech.ozmaden_developerslife
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
